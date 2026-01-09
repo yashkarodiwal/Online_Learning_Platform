@@ -9,7 +9,6 @@ const jwt = require('jsonwebtoken');
 // const sendEmail = require('../utils/sendEmail');
 const authMiddleware = require('../middleware/auth');
 
-// ❌ [REMOVED] Old POST /:courseId route — handled by Razorpay now
 
 // ✅ GET /api/enrollments/my-courses – View all enrolled courses
 router.get('/my-courses', authMiddleware, async (req, res) => {
@@ -22,7 +21,12 @@ router.get('/my-courses', authMiddleware, async (req, res) => {
             .populate('course')
             .sort({ enrolledAt: -1 });
 
-        res.json(enrollments.map(e => e.course));
+        const courses = enrollments
+            .filter(e => e.course)   // remove null populated courses
+            .map(e => e.course);
+
+        res.json(courses);
+
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
