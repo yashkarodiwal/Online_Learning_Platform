@@ -57,8 +57,14 @@ const Dashboard = () => {
     const fetchEnrolledCourses = async () => {
         try {
             const res = await axios.get('http://localhost:5000/api/enrollments/my-courses', authHeaders);
-            setCourses(res.data);
-            res.data.forEach(course => getLessonsAndProgress(course._id));
+            const validCourses = res.data.filter(course => course && course._id);
+
+            setCourses(validCourses);
+
+            validCourses.forEach(course =>
+                getLessonsAndProgress(course._id)
+            );
+
         } catch (err) {
             console.error(err);
         }
@@ -67,7 +73,7 @@ const Dashboard = () => {
     const fetchInstructorCourses = async () => {
         try {
             const res = await axios.get('http://localhost:5000/api/courses');
-            const instructorCourses = res.data.filter(c => c.instructor._id === user._id);
+            const instructorCourses = res.data.filter(c => c.instructor && c.instructor._id === user._id);
             setCourses(instructorCourses);
         } catch (err) {
             console.error(err);
@@ -151,7 +157,9 @@ const Dashboard = () => {
                                 <p className="text-muted">You're not enrolled in any courses yet.</p>
                             ) : (
                                 <div className="row">
-                                    {courses.map(course => {
+                                        {courses
+                                            .filter(course => course && course._id)
+                                            .map(course => {
                                         const progress = courseProgress[course._id] || { completed: 0, total: 0 };
                                         const percent = progress.total ? Math.round((progress.completed / progress.total) * 100) : 0;
 
