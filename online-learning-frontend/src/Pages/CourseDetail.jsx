@@ -26,7 +26,7 @@ const CourseDetail = () => {
 
     const fetchCourse = async () => {
         try {
-            const res = await axios.get(`https://online-learning-platform-x06t.onrender.com/api/courses/${id}`);
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/courses/${id}`);
             setCourse(res.data);
         } catch {
             console.error('Failed to load course');
@@ -35,7 +35,7 @@ const CourseDetail = () => {
 
     const fetchLessons = async () => {
         try {
-            const res = await axios.get(`https://online-learning-platform-x06t.onrender.com/api/courses/${id}/lessons`);
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/courses/${id}/lessons`);
             setLessons(res.data);
         } catch {
             console.error('Failed to load lessons');
@@ -44,7 +44,7 @@ const CourseDetail = () => {
 
     const fetchProgress = async () => {
         try {
-            const res = await axios.get(`https://online-learning-platform-x06t.onrender.com/api/progress/${id}`, authHeaders);
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/progress/${id}`, authHeaders);
             setProgress(res.data?.completedLessons || []);
         } catch {
             console.error('Failed to fetch progress');
@@ -53,7 +53,7 @@ const CourseDetail = () => {
 
     const fetchEnrollment = async () => {
         try {
-            const res = await axios.get('https://online-learning-platform-x06t.onrender.com/api/enrollments/my-courses', authHeaders);
+            const res = await axios.get('${import.meta.env.VITE_API_URL}/api/enrollments/my-courses', authHeaders);
             const enrolled = res.data.some(course => course._id === id);
             setIsEnrolled(enrolled);
         } catch {
@@ -63,7 +63,7 @@ const CourseDetail = () => {
 
     const fetchDiscussions = async () => {
         try {
-            const res = await axios.get(`https://online-learning-platform-x06t.onrender.com/api/discussions/${id}`);
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/discussions/${id}`);
             setDiscussions(res.data);
         } catch {
             console.error('Failed to load discussions');
@@ -112,7 +112,7 @@ const CourseDetail = () => {
 
     const markComplete = async (lessonId) => {
         try {
-            await axios.post(`https://online-learning-platform-x06t.onrender.com/api/progress/complete/${lessonId}`, {}, authHeaders);
+            await axios.post(`${import.meta.env.VITE_API_URL}/api/progress/complete/${lessonId}`, {}, authHeaders);
             fetchProgress();
         } catch {
             alert('Failed to mark lesson complete');
@@ -124,7 +124,7 @@ const CourseDetail = () => {
 
         try {
             await axios.post(
-                `https://online-learning-platform-x06t.onrender.com/api/discussions/${id}`,
+                `${import.meta.env.VITE_API_URL}/api/discussions/${id}`,
                 { content: newComment },
                 authHeaders
             );
@@ -141,7 +141,7 @@ const CourseDetail = () => {
 
         try {
             await axios.post(
-                `https://online-learning-platform-x06t.onrender.com/api/discussions/${id}/reply/${parentId}`,
+                `${import.meta.env.VITE_API_URL}/api/discussions/${id}/reply/${parentId}`,
                 { content },
                 authHeaders
             );
