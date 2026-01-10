@@ -23,7 +23,7 @@ const AddCourse = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/api/courses', formData, authHeaders);
+            await axios.post('https://online-learning-platform-x06t.onrender.com/api/courses', formData, authHeaders);
             setMessage('✅ Course created successfully!');
             setTimeout(() => navigate('/dashboard'), 1000);
         } catch (err) {
