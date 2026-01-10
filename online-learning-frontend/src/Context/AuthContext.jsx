@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
         }
 
         try {
-            const res = await axios.get('http://localhost:5000/api/users/me', {
+            const res = await axios.get('https://online-learning-platform-x06t.onrender.com/api/users/me', {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setUser(res.data);
