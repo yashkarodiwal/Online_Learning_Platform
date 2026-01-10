@@ -12,7 +12,7 @@ const Checkout = () => {
     useEffect(() => {
         const fetchCourse = async () => {
             try {
-                const res = await axios.get(`https://online-learning-platform-x06t.onrender.com/api/courses/${courseId}`);
+                const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/courses/${courseId}`);
                 setCourse(res.data);
             } catch (err) {
                 alert('❌ Course not found');
@@ -29,7 +29,7 @@ const Checkout = () => {
 
         try {
             const { data: order } = await axios.post(
-                'https://online-learning-platform-x06t.onrender.com/api/payment/create-order',
+                '${import.meta.env.VITE_API_URL}/api/payment/create-order',
                 { amount: course.price, courseId },
                 {
                     headers: {
@@ -50,7 +50,7 @@ const Checkout = () => {
 
                     try {
                         const verifyRes = await axios.post(
-                            'https://online-learning-platform-x06t.onrender.com/api/payment/verify',
+                            '${import.meta.env.VITE_API_URL}/api/payment/verify',
                             {
                                 razorpay_payment_id,
                                 razorpay_order_id,
