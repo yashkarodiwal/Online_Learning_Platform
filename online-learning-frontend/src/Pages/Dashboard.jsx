@@ -19,7 +19,7 @@ const Dashboard = () => {
 
     const fetchNotifications = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/notifications', authHeaders);
+            const res = await axios.get('https://online-learning-platform-x06t.onrender.com/api/notifications', authHeaders);
             setNotifications(res.data);
         } catch (err) {
             console.error(err);
@@ -28,7 +28,7 @@ const Dashboard = () => {
 
     const markAsRead = async (id) => {
         try {
-            await axios.put(`http://localhost:5000/api/notifications/${id}/read`, {}, authHeaders);
+            await axios.put(`https://online-learning-platform-x06t.onrender.com/api/notifications/${id}/read`, {}, authHeaders);
             fetchNotifications();
         } catch (err) {
             alert('❌ Failed to mark notification as read');
@@ -38,8 +38,8 @@ const Dashboard = () => {
     const getLessonsAndProgress = async (courseId) => {
         try {
             const [lessonsRes, progressRes] = await Promise.all([
-                axios.get(`http://localhost:5000/api/courses/${courseId}/lessons`),
-                axios.get(`http://localhost:5000/api/progress/${courseId}`, authHeaders),
+                axios.get(`https://online-learning-platform-x06t.onrender.com/api/courses/${courseId}/lessons`),
+                axios.get(`https://online-learning-platform-x06t.onrender.com/api/progress/${courseId}`, authHeaders),
             ]);
 
             const total = lessonsRes.data.length;
@@ -56,7 +56,7 @@ const Dashboard = () => {
 
     const fetchEnrolledCourses = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/enrollments/my-courses', authHeaders);
+            const res = await axios.get('https://online-learning-platform-x06t.onrender.com/api/enrollments/my-courses', authHeaders);
             const validCourses = res.data.filter(course => course && course._id);
 
             setCourses(validCourses);
@@ -72,7 +72,7 @@ const Dashboard = () => {
 
     const fetchInstructorCourses = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/courses');
+            const res = await axios.get('https://online-learning-platform-x06t.onrender.com/api/courses');
             const instructorCourses = res.data.filter(c => c.instructor && c.instructor._id === user._id);
             setCourses(instructorCourses);
         } catch (err) {
