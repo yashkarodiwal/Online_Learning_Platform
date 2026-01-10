@@ -15,7 +15,7 @@ const CourseBrowser = () => {
 
     const fetchAllCourses = async () => {
         try {
-            const res = await axios.get('https://online-learning-platform-x06t.onrender.com/api/courses');
+            const res = await axios.get('${import.meta.env.VITE_API_URL}/api/courses');
             setCourses(res.data);
         } catch (err) {
             console.error('Error fetching courses:', err);
@@ -24,7 +24,7 @@ const CourseBrowser = () => {
 
     const fetchEnrolledCourses = async () => {
         try {
-            const res = await axios.get('https://online-learning-platform-x06t.onrender.com/api/enrollments/my-courses', authHeaders);
+            const res = await axios.get('${import.meta.env.VITE_API_URL}/api/enrollments/my-courses', authHeaders);
             setEnrolledCourses(res.data.map(course => course._id));
         } catch (err) {
             console.error('Error fetching enrolled courses:', err);
