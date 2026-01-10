@@ -22,7 +22,7 @@ const AddLesson = () => {
 
     const fetchCourse = async () => {
         try {
-            const res = await axios.get(`https://online-learning-platform-x06t.onrender.com/api/courses/${id}`);
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/courses/${id}`);
             setCourse(res.data);
         } catch (err) {
             setMessage('Error loading course');
@@ -47,7 +47,7 @@ const AddLesson = () => {
         setMessage('');
 
         try {
-            await axios.post(`https://online-learning-platform-x06t.onrender.com/api/courses/${id}/lessons`, formData, authHeaders);
+            await axios.post(`${import.meta.env.VITE_API_URL}/api/courses/${id}/lessons`, formData, authHeaders);
             setMessage('✅ Lesson added!');
             setFormData({ title: '', content: '', videoUrl: '' });
         } catch (err) {
