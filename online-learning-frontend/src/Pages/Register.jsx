@@ -13,7 +13,7 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('http://localhost:5000/api/auth/register', form);
+            const res = await axios.post('https://online-learning-platform-x06t.onrender.com/api/auth/register', form);
             localStorage.setItem('token', res.data.token);
             await fetchUser();
             navigate('/dashboard');
