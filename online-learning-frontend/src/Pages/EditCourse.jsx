@@ -24,7 +24,7 @@ const EditCourse = () => {
     useEffect(() => {
         const fetchCourse = async () => {
             try {
-                const res = await axios.get(`http://localhost:5000/api/courses/${id}`);
+                const res = await axios.get(`https://online-learning-platform-x06t.onrender.com/api/courses/${id}`);
                 const course = res.data;
 
                 if (user?._id !== course.instructor._id) {
@@ -57,7 +57,7 @@ const EditCourse = () => {
         setMessage('');
 
         try {
-            await axios.put(`http://localhost:5000/api/courses/${id}`, formData, authHeaders);
+            await axios.put(`https://online-learning-platform-x06t.onrender.com/api/courses/${id}`, formData, authHeaders);
             setMessage('✅ Course updated!');
             setTimeout(() => navigate('/dashboard'), 1000);
         } catch (err) {
@@ -71,7 +71,7 @@ const EditCourse = () => {
         if (!window.confirm('Are you sure you want to delete this course?')) return;
 
         try {
-            await axios.delete(`http://localhost:5000/api/courses/${id}`, authHeaders);
+            await axios.delete(`https://online-learning-platform-x06t.onrender.com/api/courses/${id}`, authHeaders);
             alert('✅ Course deleted');
             navigate('/dashboard');
         } catch (err) {
