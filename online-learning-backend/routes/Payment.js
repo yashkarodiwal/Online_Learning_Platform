@@ -80,7 +80,7 @@ router.post('/verify', auth, async (req, res) => {
             `Enrollment Confirmed: ${course.title}`,
             `<h3>Hello ${req.user.name},</h3>
        <p>You have successfully enrolled in <strong>${course.title}</strong>.</p>
-       <p>Start here: <a href="http://localhost:3000/courses/${course._id}">Go to Course</a></p>
+       <p>Start here: <a href="${process.env.FRONTEND_URL}/courses/${course._id}">Go to Course</a></p>
        <p>Happy Learning! 🎓</p>`
         );
 
