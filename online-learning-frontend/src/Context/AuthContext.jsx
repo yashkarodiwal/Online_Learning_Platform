@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
         }
 
         try {
-            const res = await axios.get('${import.meta.env.VITE_API_URL}/api/users/me', {
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/users/me`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setUser(res.data);
