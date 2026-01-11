@@ -16,13 +16,18 @@ const razorpay = new Razorpay({
 
 // ✅ Step 1: Create Razorpay Order
 router.post('/create-order', auth, async (req, res) => {
-    const { amount } = req.body;
+    const { courseId } = req.body;
 
     try {
+        const course = await Course.findById(courseId);
+        if (!course) {
+            return res.status(404).json({ error: 'Course not found' });
+        }
+        
         const options = {
-            amount: amount * 100, // convert to paisa
+            amount: course.price * 100, // convert to paisa
             currency: 'INR',
-            receipt: `receipt_order_${Date.now()}`
+            receipt: `receipt_${courseId}_${Date.now()}`
         };
 
         const order = await razorpay.orders.create(options);
