@@ -29,7 +29,7 @@ const Checkout = () => {
 
         try {
             const { data: order } = await axios.post(
-                '${import.meta.env.VITE_API_URL}/api/payment/create-order',
+                `${import.meta.env.VITE_API_URL}/api/payment/create-order`,
                 { amount: course.price, courseId },
                 {
                     headers: {
@@ -50,7 +50,7 @@ const Checkout = () => {
 
                     try {
                         const verifyRes = await axios.post(
-                            '${import.meta.env.VITE_API_URL}/api/payment/verify',
+                            `${import.meta.env.VITE_API_URL}/api/payment/verify`,
                             {
                                 razorpay_payment_id,
                                 razorpay_order_id,
