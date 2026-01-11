@@ -23,7 +23,7 @@ const AddCourse = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('${import.meta.env.VITE_API_URL}/api/courses', formData, authHeaders);
+            await axios.post(`${import.meta.env.VITE_API_URL}/api/courses`, formData, authHeaders);
             setMessage('✅ Course created successfully!');
             setTimeout(() => navigate('/dashboard'), 1000);
         } catch (err) {
