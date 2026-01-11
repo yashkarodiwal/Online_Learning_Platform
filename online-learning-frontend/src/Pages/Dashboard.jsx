@@ -19,7 +19,7 @@ const Dashboard = () => {
 
     const fetchNotifications = async () => {
         try {
-            const res = await axios.get('${import.meta.env.VITE_API_URL}/api/notifications', authHeaders);
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/notifications`, authHeaders);
             setNotifications(res.data);
         } catch (err) {
             console.error(err);
@@ -56,7 +56,7 @@ const Dashboard = () => {
 
     const fetchEnrolledCourses = async () => {
         try {
-            const res = await axios.get('${import.meta.env.VITE_API_URL}/api/enrollments/my-courses', authHeaders);
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/enrollments/my-courses`, authHeaders);
             const validCourses = res.data.filter(course => course && course._id);
 
             setCourses(validCourses);
@@ -72,7 +72,7 @@ const Dashboard = () => {
 
     const fetchInstructorCourses = async () => {
         try {
-            const res = await axios.get('${import.meta.env.VITE_API_URL}/api/courses');
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/courses`);
             const instructorCourses = res.data.filter(c => c.instructor && c.instructor._id === user._id);
             setCourses(instructorCourses);
         } catch (err) {
