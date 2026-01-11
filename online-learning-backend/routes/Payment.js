@@ -75,14 +75,16 @@ router.post('/verify', auth, async (req, res) => {
         });
 
         // 6. Send confirmation email
-        await sendEmail(
-            req.user.email,
-            `Enrollment Confirmed: ${course.title}`,
-            `<h3>Hello ${req.user.name},</h3>
-       <p>You have successfully enrolled in <strong>${course.title}</strong>.</p>
-       <p>Start here: <a href="${process.env.FRONTEND_URL}/courses/${course._id}">Go to Course</a></p>
-       <p>Happy Learning! 🎓</p>`
-        );
+        sendEmail(
+  req.user.email,
+  `Enrollment Confirmed: ${course.title}`,
+  `<h3>Hello ${req.user.name},</h3>
+   <p>You have successfully enrolled in <strong>${course.title}</strong>.</p>
+   <p>Start here: <a href="${process.env.FRONTEND_URL}/courses/${course._id}">Go to Course</a></p>
+   <p>Happy Learning! 🎓</p>`
+).catch(err => {
+  console.error("❌ Email failed but payment succeeded:", err.message);
+});
 
         return res.json({
             success: true,
