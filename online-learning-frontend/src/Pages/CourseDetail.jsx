@@ -53,7 +53,7 @@ const CourseDetail = () => {
 
     const fetchEnrollment = async () => {
         try {
-            const res = await axios.get('${import.meta.env.VITE_API_URL}/api/enrollments/my-courses', authHeaders);
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/enrollments/my-courses`, authHeaders);
             const enrolled = res.data.some(course => course._id === id);
             setIsEnrolled(enrolled);
         } catch {
