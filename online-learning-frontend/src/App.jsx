@@ -1,15 +1,15 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Dashboard from './pages/Dashboard';
+import Login from './Pages/Login';
+import Register from './Pages/Register';
+import Dashboard from './Pages/Dashboard';
 import { AuthProvider, useAuth } from './Context/AuthContext';
-import CourseBrowser from './pages/CourseBrowser';
-import CourseDetail from './pages/CourseDetail';
-import AddCourse from './pages/AddCourse';
-import AddLesson from './pages/AddLesson';
-import EditCourse from './pages/EditCourse';
-import Checkout from './pages/Checkout';
-import PaymentSuccess from './pages/PaymentSuccess';
+import CourseBrowser from './Pages/CourseBrowser';
+import CourseDetail from './Pages/CourseDetail';
+import AddCourse from './Pages/AddCourse';
+import AddLesson from './Pages/AddLesson';
+import EditCourse from './Pages/EditCourse';
+import Checkout from './Pages/Checkout';
+import PaymentSuccess from './Pages/PaymentSuccess';
 
 function PrivateRoute({ children }) {
   const { user } = useAuth();
