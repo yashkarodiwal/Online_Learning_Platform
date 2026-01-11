@@ -13,7 +13,7 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('${import.meta.env.VITE_API_URL}/api/auth/register', form);
+            const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/register`, form);
             localStorage.setItem('token', res.data.token);
             await fetchUser();
             navigate('/dashboard');
