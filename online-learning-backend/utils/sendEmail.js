@@ -1,26 +1,23 @@
 // utils/sendEmail.js
-const nodemailer = require('nodemailer');
+const sgMail = require('@sendgrid/mail');
+
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const sendEmail = async (to, subject, htmlContent) => {
     try {
-        const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: process.env.EMAIL_USER,
-                pass: process.env.EMAIL_PASS,
-            },
-        });
-
-        const mailOptions = {
-            from: `"Online Learning" <${process.env.EMAIL_USER}>`,
+        await sgMail.send({
             to,
+            from: process.env.EMAIL_FROM, // must be verified sender
             subject,
             html: htmlContent,
-        };
-
-        await transporter.sendMail(mailOptions);
+        });
+        console.log("✅ Email sent to:", to);
     } catch (err) {
-        console.error('❌ Email sending failed:', err.message);
+        console.error(
+            '❌ SendGrid error:',
+            err.response?.body || err.message
+        );
+        throw err;
     }
 };
 
